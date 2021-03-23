@@ -1,0 +1,2764 @@
+D/factorydomain////
+Projects/IMS/source/sdk/cpaas/web/config
+:pserver:anjanik@10.1.30.15:/var/cvs
+THS_IMS_WEBRTC_BRANCH
+<?xml version = "1.0" encoding = "UTF-8"?>
+<ncm-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns = "http://www.hellosoft.com/ncm-config.xsd">
+   
+   <!-- ncm config contains list of adapter elements -->
+   <!-- adapter element contains all elements related to an adapter information
+        The 'type' attribute specifies type of adapter
+        example: wlan, WIMAX, cell, cell-data, HSPA, PPP, BT, IKE, LTE -->
+
+   <!-- The elements like ss(signal strength), snr, ber, ecio contains entry, scan,
+        exit, return limits as attributes -->
+
+   <!-- The element if-name-list contains adapter names separated by comma.
+        The names which are matched here will be treated as corresponding
+        adapter type -->
+
+   <!-- management element is optional. It contains sub elements like
+        auto-handoff, manage-opt etc-->
+
+   <!-- The element static-if contains adapter name as [name = "lte0"] and an adapter IP address.
+	The names which are matched here will be treated as available in system and will be added
+	to adapter list. If the static-if is also available in system, The interface should be added
+	in ignore-if-name-list. -->
+
+   <!-- ignore-if-name-list is a separate element which is parallel to adapter element and
+	holds interface name list. These adapter names will be ignored even through these
+	are available in system -->
+
+   <adapter type = "wlan">
+      <ss entry = "70" return = "60" scan = "50" exit = "40"/>
+      <snr entry = "35" return = "30" scan = "25" exit = "20"/>
+      <management>
+         <auto-handoff>1</auto-handoff>
+         <manage-opt>1</manage-opt>
+         <auto-select-if>1</auto-select-if>
+	 <if-name/>
+         <scan-list-view>3</scan-list-view>
+	 <enterprise-profile-name/>
+      </management>
+      <!-- In some Android phones, WiFi adapter has name "eth0" -->
+      <if-name-list>
+         wifi, wi-fi, wireless, 80211, 802.11, TNET, tiwlan, NPME\JEDI11, wlan
+      </if-name-list>
+   </adapter>
+
+   <adapter type = "wimax">
+      <ss entry = "40" return = "30" scan = "20" exit = "10"/>
+      <if-name-list> wimax, wibro </if-name-list>
+   </adapter>
+
+   <adapter type = "cell">
+      <ss entry = "40" return = "30" scan = "20" exit = "10"/>
+      <ber entry = "4" return = "5" scan = "6" exit = "7"/>
+      <ecio entry = "1" return = "3" scan = "5" exit = "7"/>
+   </adapter>
+
+   <adapter type = "cell-data">
+      <ss entry = "40" return = "30" scan = "20" exit = "10"/>
+      <snr entry = "4" return = "3" scan = "2" exit = "1"/>
+      <ecio entry = "1" return = "3" scan = "5" exit = "7"/>
+      <if-name-list>
+         edge, gprs, cdma, evdo, ev-do, evdv, ev-dv, cell, rmnet
+      </if-name-list>
+   </adapter>
+
+   <adapter type = "hspa">
+      <if-name-list> hspa, hsdpa, hsupa </if-name-list>
+   </adapter>
+
+   <adapter type = "ppp">
+      <if-name-list> ppp </if-name-list>
+   </adapter>
+
+   <adapter type = "bt">
+      <if-name-list> bluetooth </if-name-list>
+   </adapter>
+
+   <adapter type = "ike">
+      <if-name-list> safenet, safe-net </if-name-list>
+   </adapter>
+
+   <adapter type = "lte">
+      <if-name-list>VoLTE-Network, rmmet_data</if-name-list>
+      <!--<static-if name = "lte0">192.168.41.23</static-if> -->
+   </adapter>
+
+   <!--<ignore-if-name-list>GCTLTE1, L50LTE1</ignore-if-name-list> --> 
+   <ignore-if-name-list></ignore-if-name-list>
+   <apn>
+      <type>1</type>
+      <name>geosecure.motolab.com</name>
+   </apn>
+</ncm-config>
+
+<?xml version = "1.0" encoding = "UTF-8"?>
+<msm-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://www.hellosoft.com/msm-config.xsd">
+   
+   <!-- signin-info-i/p:  1.UI mode 2.SIM mode 3.FILE mode -->
+   <signin-mode>1</signin-mode>
+   
+   <serv-port>5060</serv-port>
+
+   <lte-info>
+      <ltetocs-fbtime>80</ltetocs-fbtime>
+
+      <lte_reconnect_intvl>300</lte_reconnect_intvl>
+
+      <lte_detwait_intvl>2</lte_detwait_intvl>
+
+      <!-- List of Emergency numbers(Highest priority) -->
+      <dial-digmap priority=1 if-type=cs>911</dial-digmap>
+
+      <!-- List of CS only numbers(Second priority) -->
+      <dial-digmap priority=2 if-type=cs>*228,611,*73</dial-digmap>
+
+      <!-- List of numbers allowed on LTE & CS -->
+      <dial-digmap  priority=3 if-type=lte>xxxxxxx.t,*67x.t,*82x.t,*65,*85,*86,*62,*111,*222,*225,*333,*289,*490,*491,*492,*493,*494,*495,#62,#111,#222,#225,#333,#289,62,111,222,225,333,289</dial-digmap>
+   </lte-info>
+
+   <sim-info>
+     	<!-- Domain name with which voip starts -->
+    	<dom-name>192.168.42.4</dom-name>
+
+     	<!-- PCSCF address list -->
+     	<pcscf-addr>192.168.42.4</pcscf-addr>
+
+     	<!-- Public Id as part of signin info -->
+     	<public-Id>sip:9845900301@192.168.42.4</public-Id>
+
+     	<!-- Private Id as part of signin info -->
+     	<private-Id>9845900301@192.168.42.4</private-Id>
+
+     	<!-- Password as part of signin info -->
+     	<password>mavenir</password>
+   </sim-info>
+
+</msm-config>
+[CALLERID]
+# Caller id generation type
+# 0-DISABLED
+# 1-DTMF
+# 2-FSK BELLCORE
+# 3-FSK ETSI
+# 4-JAPAN CLIP(ENGLISH)
+# 5-JAPAN JCLIP(JAPANESE)
+# 6-BT
+# 7-BRAZIL DTMF
+# 8-KT 
+callerid-gen-type=0
+
+# While adding custom tones, use tone-id between 150 - 200
+
+[RINGINGTONE]
+toneid=70
+tonename=Ringing-tone 
+tonecycle=32767
+componentcount=1 
+modulationtype=0
+numofcycles=1
+freq1phaseangle=0
+freq2phaseangle=0
+divideby3freq1=0
+divideby3freq2=0
+ontime=1000 
+offtime=2000
+frequency1=425
+frequency2=375
+level1=10 
+level2=10 
+
+[RING]
+toneid=89
+tonename=Ring
+tonecycle=32767
+componentcount=1
+modulationtype=0
+numofcycles=1
+freq1phaseangle=0
+freq2phaseangle=0
+divideby3freq1=0
+divideby3freq2=0
+ontime=1000
+offtime=2000
+frequency1=425
+frequency2=375
+level1=10
+level2=10
+
+
+[BUSYTONE]
+toneid=72
+tonename=Busy-tone
+tonecycle=32767
+componentcount=1
+modulationtype=0
+numofcycles=1
+freq1phaseangle=0
+freq2phaseangle=0
+divideby3freq1=0
+divideby3freq2=0
+ontime=750
+offtime=750
+frequency1=400
+frequency2=0
+level1=10
+level2=0
+
+[DIALTONE]
+toneid=66
+tonename=Dial-tone
+tonecycle=0
+componentcount=1
+modulationtype=0
+numofcycles=1
+freq1phaseangle=0
+freq2phaseangle=0
+divideby3freq1=0
+divideby3freq2=0
+ontime=64000
+offtime=0
+frequency1=425
+frequency2=375
+level1=10
+level2=10
+
+[CALLWAITINGTONE]
+toneid=79
+tonename=Callwaiting-tone
+tonecycle=3
+componentcount=2
+modulationtype=0 0
+numofcycles=1 1 
+freq1phaseangle=0 0 
+freq2phaseangle=0 0 
+divideby3freq1=0 0 
+divideby3freq2=0 0 
+ontime=200 200
+offtime=100 7500
+frequency1=400 400 
+frequency2=0 0
+level1=10 10 
+level2=0 0
+
+[ERRORTONE]
+toneid=117
+tonename=Error-tone
+tonecycle=32767
+componentcount=1
+modulationtype=0
+numofcycles=1
+freq1phaseangle=0
+freq2phaseangle=0
+divideby3freq1=0
+divideby3freq2=0
+ontime=750
+offtime=750
+frequency1=400
+frequency2=0
+level1=10
+level2=0
+
+[WARNINGTONE]
+toneid=83
+tonename=Warning-tone
+tonecycle=32767
+componentcount=1
+modulationtype=0
+numofcycles=1
+freq1phaseangle=0
+freq2phaseangle=0
+divideby3freq1=0
+divideby3freq2=0
+ontime=750
+offtime=750
+frequency1=400
+frequency2=0
+level1=10
+level2=0
+
+# VERSION RELEASE 3.7
+
+# Modify this file carefully. hs_voip_cfg.txt file contains the configuration used by application.
+
+# YOU SHOULD USE CLI INSTEAD OF MODIFYING THIS FILE
+
+# Wrong configuration may result in unspecified system behaviour. The system may not even come up
+
+# Release Version
+version=3.8
+
+[GENERIC]
+# Password for CLI authentication. It can be <=31 characters
+clipassword=a
+
+# Transport protocol list
+transportprotocollist=WS UDP TCP
+
+# IP network mode (0 - IPV4, 1 - IPV6, 2 - Dual)
+IP-Network-Mode=0
+
+# Domain name(0.0.0.0 if no domain name) with optional port number, IP address is accepted
+domainname=factorydomain
+
+# NTP server ipaddress with port number
+ntpserverip=0.0.0.0:123
+
+# List of Network adapater names separated with pipe(|)
+networkadapters=
+
+# Auto configuration mechanisms types
+# 0 - Disable
+# 1 - HS_IMS_AUTOCONF_HTTP_BASED
+# 2 - HS_IMS_AUTOCONF_OMADM_BASED 
+autoconf-techtype=1
+
+# End user flag
+# 0 - reject external EUCR request
+# 1 - accept external ECUR request 
+allow-exteucr=1
+
+[[SIP]]
+# SIP User Agent name
+useragentname=HsImsCmdApp-Posix/2.0
+
+# SIP local port
+siplocalport=5060
+
+# Flag to indicate usage of SIP short headers facility (1 = allowed, 0 = not allowed)
+sipshortheaderflag=0
+
+# Flag to indicate GRUU support at local end(0=disable, 1=enable) 
+gruu-support-flag=1
+
+# Flag to indicate session expiry support at local end if enabled sessiontimeout >=90
+alwaysdo-sessionrefreshflag=1
+
+# SIP session refresh timeout. The best accepted values are less than or equal to 1800
+sipsessiontimeout=1800
+
+# SIP timer T1 in milli seconds for an Estimate of Round trip time(RTT), 
+# used as initial values of TimerA, TimerE and TimerG
+siptimerT1value=500
+
+# Sip timer T2 in milli seconds for invite responses and non invite req
+siptimerT2value=4000
+
+# Sip timer QuickFailover timeout in milli seconds
+# Value should not exceed (64 * siptimerT1value)
+sipfailovertimeout=4000
+
+# SIP invite request transaction timeout timer in milli seconds, default is 64*T1
+siptimerB=32000
+
+# SIP wait timeout timer for invite response retransmit in milli seconds, to be greater than 32secs
+siptimerD=33000
+
+# SIP non-invite request transaction timeout timer in milli seconds, default is 64*T1
+siptimerF=32000
+
+# SIP wait timeout timer for ACK receiving in milli seconds, default is 64*T1 
+siptimerH=32000
+
+# SIP wait timeout timer for ACK retransmit receiving in milli seconds, default is 5secs
+siptimerI=5000
+
+# SIP wait timeout timer for non-invite request retransmit receiving in milli seconds, default is 64*T1
+siptimerJ=32000
+
+# SIP wait timeout timer for non-invite response retransmit receiving in milli seconds, default is 5secs
+siptimerK=5000 
+
+# Downgrade to no security flag
+downgrade-to-no-security-flag=0
+
+# Flag to support RFC 4320 and 4321
+NIT-fixes=0
+
+# Caller preference to accept the particular contacts
+accept-contact=
+
+# Caller preference to reject the particular contact
+reject-contact=
+
+# User-agent capabilities
+UA-capabilities=
+
+# Caller preference request disposition
+request-disposition=
+
+# Indicates whether the dialed string is telephone number or just user part of SIP URI
+# 0 - SIP URI user
+# 1 - TEL URI number
+dial-stringflag=0
+
+# History info support - when enabled sends History Info header as per RFC 4244
+histinfo-enableflag=1
+
+# PRACK support for reliable provisional response (0=disable, 1=enable)
+prack-enableflag=0
+
+# RPORT enable flag - sends rport when the flag=1 
+rport-enableflag=0
+
+# ToS(Type of Service) field for IP packets containing SIP messages, valid values are 0-63
+sip-tos=0
+
+# Request TCP connection reuse flag(0=disable, 1=enable)
+support-via-alias=0
+
+# The DHCP lease timeout value, if user doesn't give it's defaulted to 1 sec.
+# This is only for clients requesting time, it can be reset by the server.
+dhcp-lease-timeout=1
+
+
+# Strict Conformance flag to lessen the conformance.
+# Set the particular bit to confirm to the below
+# mentioned conformance requirements. Requirements
+# are listed with the reference to RFC[section].
+# Set all bits to completely confirm to the standarads
+# specification. These flags are arrived based on
+# various IOTs.
+# Example:
+# 0   - 0x0 Strict conformance not followed
+# 1   - 0x1 Telephone context, RFC 3966[5.1]
+# 2   - 0x2 Contact header, RFC 3261[20.1]
+# 4   - 0x4 Notify Body, RFC 3515[2.4.5]
+# 8   - 0x8 Subscription state, RFC 3515[2.4.7]
+# 16  - 0x10 Subscription expires, RFC 3265[4.4.4]
+# 32  - 0x20 Allow header, RFC 3261[20]
+# 64  - 0x40 Max forwards, RFC 3261[20]
+# 128 - 0x80 Via header ordering, RFC 3261[8.2.6.2]
+# 256 - 0x100 Replaces in early dialog, RFC 3891[3]
+# 512   - 0x200 Update header conformance, RFC 3261[20.5]
+# 1024  - 0x400 Expires in Contact of REGISTER response, RFC 3261[10.3]
+# 2048  - 0x800 Notify Final Response, RFC 3265[4.4.7]
+# 4096  - 0x1000 Registration in progress, RFC 3261[10.1]
+# 8192  - 0x2000 Content Length conformance, RFC 3261[7.5]
+# 16384 - 0x4000 URI comparision, RFC 3261[19.1.4]
+# 32768 - 0x8000 Random Call-id
+# 65536  - 0x00010000 SDP version number, RFC 3264[8]
+# 131072 - 0X00020000 SDP Connect mode in hold & resume of media,
+# for above bit, if bit is zero then conformance with RFC 6337[5.3] else if bit is set not conformance
+# 262144 - 0x00040000 SDP for session refresh RFC 6337[5.1]
+strict-conformance=0
+
+# Bitmap to deviate from the RFC requirements
+# Set the bit to deviate from specification for IOT customization
+# for some clients.
+# Requirements are listed with the reference to RFC[section].
+# 0 - 0x00000000 No deviation allowed
+# 1 - 0x00000001 Matching Contact address for Forking RFC 3261[19.3]
+specs-deviation=0
+
+#SIP credentials reuse  (0 - Disabled   1- Enabled)
+reuse-sipcredentials=1
+
+# Flag to indicate instance id support (0=disable, 1=enable) 
+#  Should not be disabled if GRUU flag is enabled
+# should not be disabled if enable-sipoutbound flag is enabled
+instanceid-flag=1
+
+#To store generated instance id, created as per RFC 5626 and RFC 5627
+#Not to be modified explicitly
+instance-id=
+
+# Referred by flag(0=disable, 1=enable)
+referredbyflag=0
+
+# Flag used by CCM for conference URI
+isfocusflag=0
+
+# Indicates support for RFC3680 Valid values are 0 and 1
+reg-event-package=0
+
+# Comma seperated list of events
+unsolicited-notify-event=message-summary
+
+# Flag used by Replace header
+earlyonlyflag=1
+
+# IMS 3GPP Compliance option for SIP
+#0 - 0x0 disable
+#1 – 0x01 Authorization header in the Register request
+#2 - 0x02 Refresh rate for Register and Subscription
+SIP-Option-3GPP=0
+
+# Sip internal signaling port
+siploopbackport=9060
+
+# Pre-built route set for out-session requests (uri cannot exceed 256 chars)
+pre-builtroute-set=
+
+# Sip-client-authen-flag (0-disable, 1-enable)
+client-auth-flag=0
+
+# Sip reg failback count
+reg-failback-count=4
+
+# Option for P-access-network-info header
+# 0 – disable
+# 1 – Auto
+# 2 - configured
+p-accessnw-opt=1
+
+# P-Access-Network-Info
+p-accessnw-info=
+
+# enable-ice flag (0-disable, 1-enable)
+enable-ice=1
+
+# Timeout for ICE Events in seconds
+ice-event-timeout=60
+
+# To add relay candidates irrespective of NAT type
+# 0 - disabled 1- enabled
+always-useturn=1
+
+#Host Candidate Preference
+ice-host-cand-type-pref=126
+
+# Server Reflexive Candidate Preference
+ice-srflx-cand-type-pref=100
+
+# Peer Reflexive Candidate Preference
+ice-prflx-cand-type-pref=110
+
+# Relayed Candidate Preference
+ice-relayed-cand-type-pref=0
+
+# Keepalive Timer for sending STUN binding requests and  STUN binding indications(in milliseconds)
+ice-keepalive-time=15000
+
+# STUN retransmission time(in milliseconds)
+stun-rto-value=500
+
+# Waiting time needs to wait by controlling mode while doing regular nomination. 
+ice-nominated-check-delay=400
+
+# Time interval between connectivity checks
+ice-periodic-check-time-interval=20
+
+# Nomination type as aggressive when set to 1. When set to 0 it is regular nomination. 
+ice-aggressive-nomination=0
+
+# Username fragment length used while doing connectivity checks. It must not be less than 4.
+ice-ufrag-len=8
+
+# Password length used while doing connectivity checks. It must not be less than 22.
+ice-pwd-len=22
+
+# Cease time for retransmission of low priority check binding requests when high priority pair is nominated. 
+ice-cease-retxn-all-inprog-checks=1
+
+# Maximum number of transmissions of a stun packet when response is not received
+stun-max-transmit-cnt=7
+
+# Multiple of RTO to calculate the wait time before concluding stun transaction is failed
+stun-txn-fail-rto-multiple=16
+
+# Default candidate type to be used in invite
+# 0–NAT based
+# 1-host 
+# 2-srflx
+# 3-relay
+ice-def-cand-type=3
+
+# Configurable option to control deregister/register sequence during handoff
+# 0-REG_BREAKMAKE
+# 1-REG_MAKEBREAK
+# 2-REG_ONLY
+reg-hoff-policy=0
+
+[SIPEXTENSIONS]
+# the entries should be in any of the following form
+# <method_name>.<hdr_name>=<hdr_value>
+# <method_name>.<hdr_name>.<hdr_param>=<param_value>
+# example1 : OPTIONS.USERAGENT=Hellosoft
+# example2: INVITE.CONTACT.MIH=mobility
+# <hdr_value> & <param_value> are optional
+
+[[SERVICE-CAPABILITES]]
+
+standalone-messaging=urn%3Aurn-7%3A3gpp-application.ims.iari.rcs.sm; org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.sm
+
+im-chat=urn%3Aurn-7%3A3gpp-application.ims.iari.rcse.im; org.openmobilealliance:IM-session 
+
+file-transfer=urn%3Aurn-7%3A3gpp-application.ims.iari.rcse.ft; org.openmobilealliance:File-Transfer
+
+image-share=urn%3Aurn-7%3A3gpp-application.ims.iari.gsma-is; org.gsma.imageshare
+
+video-share=urn%3Aurn-7%3A3gpp-application.ims.iari.gsma-vs; org.gsma.videoshare
+
+social-presence-info=urn%3Aurn-7%3A3gpp-application.ims.iari.rcse.sp; org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcse.sp
+
+ip-voice-call=urn%3Aurn-7%3A3gpp-service.ims.icsi.mmtel; org.3gpp.urn:urn-7:3gpp-service.ims.icsi.mmtel
+
+media-cap-audio-video-duplex-geolocation-pull=urn%3Aurn-7%3A3gppapplication.ims.iari.rcs.geopull; org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.geopull
+
+geolocation-push=urn%3Aurn-7%3A3gppapplication.ims.iari.rcs.geopush; org.3gpp.urn:urn
+
+[[MSRP]]
+
+# MSRP transport type valid value TCP/TLS
+msrp-xport-type=TCP
+
+# Port on which MSRP socket is listening for incoming requests. 
+# [RFC 4975 suggests listening port to be 2855]
+msrp-tcp-port=2855
+
+# Ports dedicated for MSRP [default range 15500-15999]
+msrp-port-base=15500
+msrp-port-limit=15999
+
+# Max amount of data that can be sent in a single scheduler cycle for high priority sessions
+msrp-high-dpc=4096
+
+# Max amount of data that can be sent in a single scheduler cycle for low priority sessions
+msrp-low-dpc=2048
+
+# MSRP answer timeout
+msrp-answer-timeout=180
+
+# MSRP transaction timeout
+msrp-trans-timeout=30
+
+# MSRP listen timeout
+msrp-listen-timeout=8
+
+# MSRP authentication timeout
+msrp-auth-timeout=8
+
+# MSRP Relay
+msrp-relay=3.6.143.118:2855
+
+# Attribute defines the length at which the message will be chunked. 
+# Set it to 0 to avoid chunking to the extent possible (number of bytes).
+# default value is 100kb
+msrp-chunk-size=102400
+
+[IM]
+
+# Default IM accept types
+im-acpt-types=*/*
+
+# Default IM accept wrap types
+im-acpt-wrap-types=*/*
+
+# Default report values to give response to application in the 
+# form of bytes or at the end of payload delivery 
+# 0-bytes
+# 1-total
+im-repo-mode=0
+
+# Initial data direction for IM session setup Applicable only for originating side
+# 1-recv_only
+# 2-send_only
+# 3-sendrecv
+# 4-inactive
+im-conn-mode=3
+
+# Default success report status
+# 0-no
+# 1-yes
+im-srepo-opt=1
+
+# Default failure report status
+# 0-no
+# 1-yes
+# 2-partial
+im-frepo-opt=1
+
+# Timeout (in seconds) with in which failure report is expected 
+im-frepo-timeout=120
+
+# Timeout (in seconds) with in which success report is expected 
+im-srepo-timeout=120
+
+# session idle timeout
+im-sess-idle-timeout=0
+
+# Incoming IM message will be automatically rejected/cancelled when size exceeds this value (value in bytes)
+im-max-size=512
+
+[LMSG]
+
+# Default accept types
+lmsg-acpt-types=*/*
+
+# Default accept wrap types
+lmsg-acpt-wrap-types=*/*
+
+# Default report values to give response to application in the form of bytes or at the end of payload delivery 
+# 0-byte
+# 1-total
+lmsg-repo-mode=0
+
+# Initial data direction for LMSG session setup Applicable only for originating side.
+# 1-recv_only
+# 2-send_only
+# 3-sendrecv
+# 4-inactive
+lmsg-conn-mode=2
+
+# Default success report status
+# 0-no
+# 1-yes
+lmsg-srepo-opt=1
+
+# Default failure report status
+# 0-no
+# 1-yes
+# 2-partial
+lmsg-frepo-opt=1
+
+# Timeout (in seconds) with in which failure report is expected 
+lmsg-frepo-timeout=120
+
+# Timeout (in seconds) with in which success report is expected 
+lmsg-srepo-timeout=120
+
+# session idle timeout
+lmsg-sess-idle-timeout=120
+
+[FT]
+
+# Default FT accept types
+ft-acpt-types=*/*
+
+# Default FT accept wrap types
+ft-acpt-wrap-types=*/*
+
+# Default success report status
+# 0-no
+# 1-yes
+ft-srepo-opt=1
+
+# Default failure report status
+# 0-no
+# 1-yes
+# 2-partial
+ft-frepo-opt=1
+
+# Warning will be given when incoming/outgoing file size exceeds this value (value in bytes)
+ft-warn-size=10485760
+
+# Incoming/outgoing files will be automatically rejected/cancelled when size exceeds this value (value in bytes)
+ft-max-size=15728640
+
+# Icon will not be sent when file transfers icon exceeds this size (value in bytes)
+ft-icon-max-size=10240
+
+#The duration for which send-complete event is delayed by service layer (number of milli seconds).
+ft-send-complete-evt-delay=60000
+
+[IMGSH]
+
+# Default IMGSH accept types
+imgsh-acpt-types=*/*
+
+# Default IMGSH accept wrap types
+imgsh-acpt-wrap-types=*/*
+
+# Default success report status
+# 0-no
+# 1-yes
+imgsh-srepo-opt=1
+
+# Default failure report status
+# 0-no
+# 1-yes
+# 2-partial
+imgsh-frepo-opt=1
+
+# Warning will be given when incoming/outgoing Image shares size exceeds this value (value in bytes)
+imgsh-warn-size=10485760
+
+# Incoming/outgoing Image share will be automatically rejected/cancelled when size exceeds this value (value in bytes)
+imgsh-max-size=15728640
+
+# Icon will not be sent when Image share’s icon exceeds this value (value in bytes)
+imgsh-icon-max-size=10240
+
+#The duration for which send-complete event is delayed by service layer (number of milli seconds).
+imgsh-send-complete-evt-delay=60000
+
+[GC]
+
+# Default GC accept types
+gc-acpt-types=*/*
+
+# Default GC accept wrap types
+gc-acpt-wrap-types=*/*
+
+# Default success report status
+# 0-no
+# 1-yes
+gc-srepo-opt=1
+
+# Default failure report status
+# 0-no
+# 1-yes
+# 2-partial
+gc-frepo-opt=1
+
+# Incoming/outgoing group chat message will be automatically rejected/cancelled when size exceeds this value (value in bytes)
+gc-max-size=512
+
+[[MESSAGING]]
+# Inidication of service capability (0-disable, 1-enable)
+sim-cap-alwaysON=0
+
+# Inidication of IM service capability to non RCS users (0-disable, 1-enable)
+sim-cap-fornonrcs=0
+
+# Fallback to SMS in case of errors (0-disable, 1-enable)
+sim-fbtoSMS=0
+
+# Whether stack sends delivery report(1-enable) OR Pass it to APP(0-disable)
+im-delrep-en=1
+
+# whether or not non-text messages are allowed (0-disable, 1-enable)
+multimedia-in-chat=0
+
+# Enables/Disables chatting capability (0-disable, 1-enable)
+sessionim-enable=1
+
+# whether to use SIMPLEIM/ CPM technology
+# 0 - SIMPLEIM
+# 1 - CPM
+sessionim-techtype=0
+
+# Accept incoming chat session options
+# 0 - when Receiver consumes chat notification by opening chatW
+# 1 - when Receiver starts typing the message
+# 2 - when Receiver intends to send the message by pressing button
+# 3 – Auto accept 
+sessionim-acpt-opt=0
+
+# Time during which a chat session is allowed to be idle before it is closed in seconds
+sesssionim-idle-timer=0
+
+# Max no of concurrent sessions in seconds
+sessionim-max-count=30
+
+# Max message size allowed during session
+sessionim-max-msgsize=5000
+
+# Whether to carry first message in INVITE(used to setup IM Session) (0-disable, 1-enable)
+first-msg-in-invite=1
+
+# URL used to access message store
+messagestore-url=factorydomain
+
+# URL used to access groupchat conference factory uri
+gc-conf-factory-uri=factorydomain
+
+[[PRESENCE]]
+# Capability polling enable/disable
+capb-polling-flag=1
+
+# Polling period in seconds
+capb-polling-period=300
+
+# Polling rate. It should be greater than zero when polling period is set to non-zero
+capb-polling-rate=2
+
+# Capabilities info expiry. It should be greater than zero when polling period is set to non-zero
+# In seconds
+capb-info-expiry=30
+
+#Polling rate period in seconds
+capb-polling-rate-period=1
+
+#Capability discovery mechanism 
+# 0 - OPTIONS
+# 1 - PRESENCE
+capb-discovery-mechanism=1
+
+#Capability discovry via common stack
+capb-discovery-via-common-stack=1
+
+[[DNS]]
+# DNS Resp timeout (should not be zero)
+dnsresptimeout=5
+
+# DNS Re Transmission timeout (should not be zero)
+dnsretranstimeout=2
+
+# Threshold time to live (should not less than 60)
+thresholdttl=60
+
+# DNS No of Re Transmissions (should not be zero)
+dnsnoofretrans=3
+
+# DNS client option
+# 0 - Use HS DNS client
+# 1 - Use get host by address
+dnsclientopt=1
+
+# Flag to enable/disable auto detect DNS ip addresses
+autodetect-dnsip=1
+
+# DNS Server1  (0.0.0.0 if no DNS Server) with port number
+primarydnsserver=0.0.0.0:53
+
+# DNS Server2  (0.0.0.0 if no DNS Server) with port number
+secondarydnsserver=0.0.0.0:53
+
+# No of bytes of cache to store DNS information (minimum 2048 bytes)
+dnscachesize=2048
+
+# User can specify the DNS information in this file
+dnsinfofilename=hs_voip_dns_info_cfg.txt
+
+# DNS source port
+# 0 - uses ephimeral port
+dns-src-port=
+
+[[TCP-CONNECTION]]
+# This is used to detect TCP disconnection as early as possible.
+tcp-conn-keepalive=60
+
+# If no message is sent out on a TCP connection for this duration, connection will be closed.
+tcp-max-idle-duration=300
+
+[[TLS]]
+# Flag to indicate security on requests
+# 0 - HS_VOIP_ALLWAYS_DISABLE_SECURITY
+# 1 - HS_VOIP_ALLWAYS_ENABLE_SECURITY
+# 2 - HS_VOIP_TEMP_DISABLE_SECURITY
+# 3 - HS_VOIP_TEMP_ENABLE_SECURITY
+mandatory-securityflag=0
+
+# Flag to indicate whether the local TLS server has to ask for client certificate
+tlsclientcertificateflag=0
+
+# Flag to indicate whether the user has to be prompted if the remote end certificate is invalid
+remoteendcertificateflag=0
+
+# Secure transports used by cipher suites(TLS,SSL3)
+securetransports=TLS
+
+# Key exchange protocols used by TLS(only RSA supported)
+keyexchangeprotocol=RSA
+
+# Cipher encryptions used by TLS(AES_128_CBC,3DES_EDE_CBC,AES_256_CBC supported
+cipherencryption=AES_128_CBC
+
+# MAC algorithms used by TLS(only SHA1 supported)
+macalgorithm=SHA1
+
+# If no message is sent out on a TLS (over TCP)
+# connection for this duration, connection will be closed.
+tls-max-idle-duration=86400
+
+# Trusted root certificates file name for TLS/SMIME
+rootcertificatefilename=
+
+# Client Private key file name
+clientprivatekeyfilename=
+
+# Client Public key file name
+clientpublickeyfilename=
+
+# Private key file name
+serverprivatekeyfilename=
+
+# Public key file name
+serverpublickeyfilename=
+
+# Certificate revocation list file name
+crlfilename=
+
+[[SMIME]]
+# Mac Algorithm used by SMIME (SHA1,MD5)are supported
+smime-mac-algorithm=SHA1
+
+# Encryption Alogrithms used by SMIME(AES_128_CBC,3DES_EDE_CBC,
+# AES_256_CBC supported) as per RFC3853
+smime-encrypt-algorithm=AES_128_CBC
+
+# SMIME Key ring file name
+smime-keyring-filename=
+
+# SMIME validation headers list
+smime-headers-list=
+
+[[NAT]]
+
+# NAT Traversal flag(0-disable, 1-enable)
+nat-traversalflag=1
+
+# NAT Ip address  (0.0.0.0 if not available) with port number
+natip=0.0.0.0
+
+# SIP NAT OPTION
+# 0 - Rport
+# 1 - STUN
+sip-nat-opt=0
+
+# SIP-ALG Detection option
+# 0 - Rport
+# 1 - Heuristic 
+sip-algdetect-opt=0
+
+# ALG server Ip address with port number
+sip-algdetect-server=0.0.0.0
+
+# Keepalive time interval
+keepalive-interval=20
+
+# Outsession keep alive option
+# 0-DISABLE
+# 1-OPTIONS
+# 2-PING
+# 3-CRLF
+# 4-EMPTY
+outsession-keepaliveopt=3
+
+# STUN server ipaddress with port number
+stunserverip=198.65.166.165:3478
+#stunserverip=stun01.sipphone.com:3478
+
+# (NOT SUPPORTED, for future use)
+# 1-Synchronous (blocking mode)
+# 2-Asynchronous(Non blocking mode)
+turnoperation-mode=1
+
+# Turn protocol mode (0-Midcom, 1-STUN behave)
+turnprotocol-mode=0
+
+# TURN server ipaddress with port number
+# defualt HSC turn server 202.153.33.20
+turnserverip=0.0.0.0:3478
+
+# TURN user name
+turn-username=voip
+
+# TURN password
+turn-password=voip
+
+[[DIGITMAP]]
+# List of digit maps. Digit maps are separated by spaces.
+# Allowed characters in digitmap are  0-9 and x, [, ], ., - and 't'.
+digitmaplist=x.T
+
+# International Dial digit prefix
+IDD-Prefix=+91
+
+# National Dial digit prefix
+NDD-Prefix=
+
+# Add the international dial digit prefix flag
+Add-IDDP-flag=0
+
+# Add the national dial digit prefix flag
+Add-NDDP-flag=0
+
+# Expand '+' in the dialed string as this
+Plus-Expansion=+
+
+# Emergency numbers list length
+Emergency-nums-list-len=1
+
+# Emergency numbers list
+Emergency-nums-list=999 
+
+[[MEDIA]]
+
+# User tones flag
+usertonesflag=1
+
+# User tones specific file name
+usertonesfilename=hs_voip_india_tones_cfg.txt
+
+# Caller id power level
+calleridpowerlevel=10
+
+# Caller Id before/after ring (0-before ring,1-after ring)
+calleridbefore-afterring=1
+
+# CID type1 Alerting signal
+# 0-NO ALERT
+# 1-DTAS
+# 2-RPAS
+# 3-LR
+# 4-LR-DTAS
+calleridtype1-alertingsignal=3
+
+# CID type 2 Alerting signal
+# 0-NO ALERT
+# 1-DTAS
+# 2-RPAS
+# 3-LR
+# 4-LR-DTAS
+calleridtype2-alertingsignal=2
+
+# CID detection type
+# 0 -  DISABLED
+# 1 -  DTMF
+# 2 -  FSK_BELLKORE
+# 3 -  FSK_ETSI
+# 4 -  JAPAN_CLIP_ENG
+# 5 -  JAPAN_CLIP_JPNS
+# 6 -  BT
+# 7 -  BRAZIL DTMF
+# 8 -  KT
+# Used to detect caller-id of an incoming FXO call
+callerid-detection-type=0
+
+[[CODECS]]
+# List of supported codecs
+# PCMU(sr)
+# PCMA(sr)
+# G729(sr)
+codecslist=AMR-WB(sr) iLBC(sr) PCMU(sr) AMR(sr)
+
+[NETWORKPROFILES]
+# mprofiles define the network preferred media information
+# currently codec list, ptime, application specific maximum bandwidth in kbps (not used)
+# and RTCP RS, RR bandwitdth values in bps can be configured
+# The codec used here should be configured in default codecs list also (for codec param details)
+# If both rtcp bandwidths are zeros will disable the rtcp flow
+# Valid Nwk types are WIFI, WIMAX, ETHERNET, CELLDATA, CELLDATA-2G, VPN, BLUETOOTH, LTE, CS 
+# CELLDATA for 3G(HSPA, CDMA2000-1x, EVDO) and CELLDATA-2G for 2G(GPRS/EDGE) networks
+# Entry should be in the following form 
+# mprofile=<nw_type>; <codec>: <ptime>; <AS_BW>; <RS_BW>, <RR_BW>; <SERVICES>
+# mprofile=<nw_type>; <codec, codec, codec>; <ptime>; <as_bw>; <rs_bw> <rr_bw>; <service, service, service>
+# Example: mprofile=WIFI; PCMU, PCMA: 20; 64; 800, 2400;CALL, IM
+
+mprofile=ETHERNET; AMR-WB,iLBC,PCMU,AMR; 20; 64; 800,2400;
+mprofile=WIFI; AMR-WB,iLBC,PCMU,AMR; 20; 64; 800,2400;
+mprofile=CELLDATA; AMR-WB,iLBC,PCMU,AMR; 20; 64; 800,2400;IM,CALL,PRESENCE
+mprofile=CELLDATA-2G;AMR-WB,iLBC,PCMU,AMR; 20; 64; 0,0;IM
+mprofile=LTE; AMR-WB,iLBC,PCMU,AMR; 20; 64; 800,2400;
+
+# Codec rate of g723  1 for 5.3, 2 for 6.3
+codecrate=1
+
+# DTMF type
+# 0 - DTMF Disabled
+# 1 - INBAND PASS THROUGH MODE
+# 2 - INBAND,PCMU MODE
+# 3 - INBAND,PCMA MODE
+# 4 - 2833 RELAY
+# 5 - SIP INFO
+# 6 - SIP INFO CISCO
+# If DTMF is disabled then DTMF detection will be disabled,
+# which is required for call features like conference through SLIC.
+# if endpoint type is other than sound-card, DTMF cannot be disabled
+dtmftype=4
+
+# Redundancy levels as per RFC 2198
+# 0 - disable 
+redundancy-levels=6
+
+# Dynamic payload type for redundancy
+red-payload-type=120
+
+# iLBC mode
+iLBC-mode=30
+
+# Minimum number packets to be received successively with same invalid 
+# pt (i.e., other than negotiated) before triggering codec change indication
+codecchangelimit=1
+
+# PT value of G7221-24
+g7221-24pt=122
+
+# PT value of G7221-32
+g7221-32pt=123
+
+# PT value of ILBC
+ilbcpt=104
+
+# PT value of G726-16
+g726-16pt=96
+
+# PT value of G726-24
+g726-24pt=97
+
+# PT value of G726-32
+g726-32pt=98
+
+# PT value of G726-40
+g726-40pt=99
+
+# PT value of DTMF(tele-event)
+# Dynamic PT for dtmf is filled in stack
+dtmfpt=101
+
+# PT value of AMR-NB
+amrnb-pt=105
+
+# AMR codec octet align (Valid values are 0 and 1)
+amrnb-octet-align=0
+
+# AMR codec mode set (valid values are any combination of values from 0 to 7 separated with comma)
+amrnb-modeset=0,1,2,3,4,5
+
+# AMR codec mode change neighbor (valid values are 0 and 1)
+amrnb-mode-change-neighbor=0
+
+# AMR codec mode change neighbor (valid values are 1 and 2)
+# Currently this param is not supported
+amrnb-mode-change-capability=2
+
+# AMR codec CRC (valid values are 0 and 1)
+# Used only if octet-align is non zero
+amrnb-crc=0
+
+# AMR codec robust sorting (valid values are 0 and 1)
+# Used only if octet-align is non zero
+amrnb-robust-sorting=0
+
+# AMR codec interleaving (used only if value is Non zero value)
+# Used only if octet-align is non zero
+amrnb-interleaving=0
+
+# AMR codec channels (supported values are 1 and 2. currently 1 is supported)
+amrnb-channels=1
+
+# PT value of AMR-WB
+amrwb-pt=102
+
+# AMR codec octet align (Valid values are 0 and 1)
+amrwb-octet-align=0
+
+# AMR codec mode set (valid values are any combination of values from 0 to 7 separated with comma)
+amrwb-modeset=0,1,2,3,4
+
+# AMR codec mode change neighbor (valid values are 0 and 1)
+amrwb-mode-change-neighbor=0
+
+# AMR codec mode change neighbor (valid values are 1 and 2)
+# Currently this param is not supported
+amrwb-mode-change-capability=2
+
+# AMR codec CRC (valid values are 0 and 1)
+# Used only if octet-align is non zero
+amrwb-crc=0
+
+# AMR codec robust sorting (valid values are 0 and 1)
+# Used only if octet-align is non zero
+amrwb-robust-sorting=0
+
+# AMR codec interleaving (used only if value is Non zero value)
+# Used only if octet-align is non zero
+amrwb-interleaving=0
+
+# AMR codec channels (supported values are 1 and 2. currently 1 is supported)
+amrwb-channels=1
+
+# PT value of EVRCB0
+evrcb0pt=106
+
+# PT value of EVRCB1
+evrcb1pt=107
+
+# PT value of EVRCB
+evrcbpt=108
+
+# Receive mode for EVRCB0 (valid values 0,1,2,3,4,5,6,7)
+evrcb0-recvmode=0
+
+# Send mode for EVRCB0 (valid values 0,1,2,3,4,5,6,7)
+evrcb0-sendmode=0
+
+# Max rate for EVRCB0
+evrcb0-maxrate=4
+
+# Min rate for EVRCB0
+evrcb0-minrate=1
+
+# Fixed rate for EVRCB1
+# 0 - 0.5
+# 1 - 1
+evrcb1-fixedrate=0
+
+# Receive mode for EVRCB1 (valid values 0,1,2,3,4,5,6,7)
+# If evrcb1 fixed rate is 1 then 0 - 6 are valid for mode 7 is not accepted
+evrcb1-recvmode=0
+
+# Send mode for EVRCB1 (valid values 0,1,2,3,4,5,6,7)
+# If evrcb1 fixed rate is 1 then 0 - 6 are valid for mode 7 is not accepted
+evrcb1-sendmode=0
+
+# Receive mode for EVRCB (valid values 0,1,2,3,4,5,6,7)
+evrcb-recvmode=0
+
+# Send mode for EVRCB (valid values 0,1,2,3,4,5,6,7)
+evrcb-sendmode=0
+
+# Max rate for EVRCB
+evrcb-maxrate=4
+
+# Min rate for EVRCB
+evrcb-minrate=1
+
+# EVRCB maximum interleave
+# maximum interleave length supported is zero.
+evrcb-maxinterleave=0
+
+# comma separated list of modes supported in order of preference
+# valid values are 0-8, '*' implies supports all modes 
+#ex: values as ‘3,* ‘  all modes are set and 3 is preferred mode
+speexnb-mode=3 
+
+# valid values are 0, 1, 
+# if codec specific vad is used then  vbr=vad is set
+speexnb-vbr=0
+
+# comma separated list of modes supported
+# valid values are 0-10, if '*' implies supports all modes
+speexwb-mode=8
+
+# valid values are 0, 1, 
+# if vadtype=2  vbr=vad is sent
+speexwb-vbr=0
+
+# comma separated list of modes supported
+# valid values are 0-10, if '*' implies supports all modes
+speexuwb-mode=8
+
+# valid values are 0, 1, 
+# if codec specific vad is used then  vbr=vad is set
+speexuwb-vbr=0
+
+# valid values are 0, 1, 
+# if codec specific vad is used then  vbr=vad is set
+ambe-modeset=0
+
+# Forward error correction option
+# 0 – disable
+# 1 – multiple stream
+# 2 – using redundancy
+# Currenlty only multiple stream is supported
+fec-opt=0
+
+# FEC schemes supported
+fec-schemes=ulpfec reed-solomon-fec parityfec
+
+# FEC one level only
+# 0 – more than one level of FEC protection is used
+# 1 - only one level of FEC protection is used
+fec-onelevelonly=0
+
+# Max number of Encoded Symbols (K)
+fec-max-k=12
+
+# Max number of Encoded and Parity Symbols (N)
+# Should be greater then max number of encoded symbols(fec-max-k)
+fec-max-n=15
+
+# OPUS Max capture rate
+opus-maxcapturerate=16000
+
+# OPUS Max avg bits per second of the session
+opus-maxavgbitrate=20000
+
+# OPUS Constant bitrate 'on' or 'off'
+opus-cbr=0
+
+# OPUS In-band FEC 'on' or 'off'
+opus-useinbandfec=0
+
+# OPUS Algorithm complexity
+opus-complexity=8
+
+[[RTT]]
+
+# Number of redundant T140 blocks in an RTP packet
+# 0 - redundancy disabled
+rtt-redundancy-levels=2
+
+# Max Tx data buffering time before sending to network in milli seconds
+rtt-txbuftime=300
+
+# Max wait time of Rx data before issuing to APP in milli seconds
+rtt-rxbuftime=1000
+
+# Wait time since no data is received from remote party, to conclude, it is non-responsive
+rtt-remote-idletimeout=300
+
+# Rx capability of receiving max number of characters per second
+rtt-cps=30
+
+[[RTP]]
+
+# RTP TX packet size
+rtptxpacketsize=20
+
+# Allowed maximum percentage of RTP packet loss.
+# The rate is calculated over a few minutes.
+# If loss rate exceeds this value, call will be disconnected
+# On EDGE, there could be very high packet loss
+rtppacketlosslimit=100
+
+# Allowed maximum number of consecutive ICMP destination
+# unreachable responses before disconnecting the call 
+rtperrorlimit=30
+
+# The start port number from which RTP can use UDP ports
+rtpportbase=49000
+
+# The end port number upto which RTP can use UDP ports
+rtpportlimit=49050
+
+# ToS(Type of Service) field for IP packets containing RTP messages, valid values are 0-63
+rtp-tos=184
+
+# Option to choose sockets, during IP address transition
+# 1 - Continue on sockets created on old IP
+# 2 - Use sockets created on new IP
+# 3 - Use neigther
+rtp-lipc-sendopt=2
+
+# Bitmap to set RTCP option where bits used as
+# 0x 0  0  0  0  0  0  0  0
+#         VH  VA       AH AA
+# 0 -  0x00 - disable RTCP
+# 1 -  0x01 - RTCP for Audio session active(AA)
+# 2 -  0x02 - RTCP for Audio session in hold(AH)
+# 16 - 0x10 - RTCP for Video session active(VA)
+# 32 - 0x20 - RTCP for Video session hold(VH)
+rtcp-option=51
+
+# RTCP interval
+rtcp-intvl=5
+
+# RTCP-FB parameters bitmap
+# 0   - 0x0000 - disable RTCP feedback
+# 1   - 0x0001 - RTCP ack param rpsi
+# 2   - 0x0002 - RTCP ack param app
+# 4   - 0x0004 - RTCP nack param pli
+# 8   - 0x0008 – RTCP nack param sli
+# 16  - 0x0010 – RTCP nack param rpsi
+# 32  - 0x0020 - RTCP nack param app
+# 64  - 0x0040 – RTCP nack generic
+# 128 – 0x0080 – RTCP ccm param fir
+# 256 – 0x0100 - RTCP ccm param tmmbr
+# 512 – 0x0200 - RTCP ccm param tstr
+# 1024– 0x0400 - RTCP ccm param vbcm /* Currently not supported */
+rtcpfb-opt=128
+
+# RTCP-FB trr-int in seconds
+rtcpfb-trrintvl=5
+
+# RTCP-FB tmmbr max packet rate value
+rtcpfb-smaxpr=
+
+# SDP maximum packetisation time
+sdpmaxpacketisationtime=100
+
+[[SIGNALINGTIMEOUTS]]
+# Timeout in seconds for getting ALERT (Ringback) for INVITE
+alerttimeout=40
+
+# Timeout in seconds for RING or Ringback
+answertimeout=180
+
+# Timeout in seconds for RELEASE request
+releasetimeout=4
+
+# Timeout in seconds for Dial tone
+dialtonetimeout=16
+
+# Inter-digit timeout in seconds
+interdigittimeout=4
+
+# T-critical timeout in seconds
+t-critical-timeout=2
+
+# Call waiting timeout in seconds
+callwaitingtimeout=30
+
+# Registration timeout in second should never be less than 20 sec
+# preferably above 60 sec
+registrationtimeout=240
+
+# Attended transfer timeout in seconds
+attendedtransfertimeout=32
+
+# Update response timer in seconds
+updateresponsetimeout=32
+
+# Update pending timer in seconds
+updatependingtimeout=32
+
+# Error tone timeout in seconds
+errortonetimeout=3
+
+# Howler tone timeout in seconds
+howlertonetimeout=10
+
+[[LOG]]
+# Bitmap to configure log level
+# 0     - 0x0000 Disable Logging
+# 1     - 0x0001 Application Logging
+# 2     - 0x0002 Log Critical
+# 4     - 0x0004 Log Error
+# 8     - 0x0008 Log Warning
+# 16    - 0x0010 Log Event
+# 32    - 0x0020 Log Info
+# 64    - 0x0040 Log Debug
+# 128   - 0x0080 Log Debug big messages
+# 256   - 0x0100 Log Debug media
+# 512   - 0x0200 Log Debug FWK
+# 1024  - 0x0400 Log Entry Exit
+#loglevel=127
+loglevel=1023
+
+# Log SIP msg option. 0=disable, 1=enable
+logsipmsgoption=0
+
+# Log Storage Path
+# currently not implemented, for future use
+log-path=
+
+# Maximum size of the total directory (in MB)
+# Cannot be zero if log-level is enabled
+log-dir-size=10
+
+# Maximum number of the files in the log directory
+# Cannot be less than 3 if log-level is enabled
+log-dir-files=20
+
+# Maximum size of each file in the log directory (in MB)
+# Cannot be zero if log-level is enabled
+log-file-size=1
+
+# To Start RCI module
+diagnostic-flag=0
+
+[[KEYS]]
+# Key to be pressed for feature-invocation
+featureinvocationkey=flashhook
+
+# DTMF keys to be pressed to initiate call transfer.
+# This is activated when HOLD/FLASH-HOOK is pressed on a call
+calltransferkey=*#
+
+# DTMF keys to be pressed to initiate call transfer with fallback.
+# This is activated when HOLD/FLASH-HOOK is pressed on a call
+calltransferfbackkey=*4
+
+# Keys to be pressed to initiate new call
+newcallkey=**
+
+# Keys to be pressed to initiate conferencing
+conferencekey=*3
+
+# Keys to be pressed for call pickup
+callpickupkey=*1
+
+# Keys to be pressed for call park
+callparkkeys=*2
+
+# Keys to pressed for enable voice mail
+vmailenbkey=
+
+# Keys to pressed for disable voice mail
+vmaildisabkey=
+
+# Keys to pressed for enable call forward always
+cfwdalwaysenbkey=
+
+# Keys to be pressed for disable call forward always
+cfwdalwaysdisabkey=
+
+# keys to be pressed for enable call forward on busy
+cfwdbusyenbkey=
+
+# Keys to be pressed for disable call forward on busy
+cfwdbusydisabkey=
+
+# Keys to be pressed for enable call forward on no answer
+cfwdnoanswenbkey=
+
+# Keys to be pressed for disable call forward on no answer
+cfwdnoanswdisabkey=
+
+# Keys to be pressed for enable call waiting
+callwaitenbkey=
+
+# Keys to be pressed for disable call waiting
+callwaitdisabkey=
+
+# Keys to be pressed for enable call transfer
+calltransferenbkey=
+
+# Keys to be pressed for disable call transfer
+calltransferdisabkey=
+
+# Keys to be pressed for enable do-not disturb
+dndenbkey=
+
+# Keys to be pressed for disable do-not disturb
+dnddisabkey=
+
+# Keys to be pressed for enable auto answer
+autoanswenbkey=
+
+# Keys to be pressed for disable auto answer
+autoanswdisabkey=
+
+# Keys to be pressed for enable caller id
+clirenbkey=
+
+# Keys to be pressed for disable caller id
+clirdisabkey=
+
+# Keys to be pressed for call return
+callreturnkey=
+
+# Keys to be pressed for voice message
+voicemessagekey=
+
+# Keys to be pressed for redial
+redialkey=
+
+# Keys to be pressed for auto call back enabling
+autocallbackenabkey=
+
+# Keys to be pressed for auto call back disabling
+autocallbackdisabkey=
+
+# Keys to be pressed for call trace
+calltracekey=
+
+# Keys to be pressed for incoming call rejection
+incallrejectlistkey=
+
+# Keys to be pressed for Incoming call acceptance
+incallacceptlistkey=
+
+# Keys to be pressed for Outgoihng call rejection
+outcallrejectlistkey=
+
+# Keys to be pressed for Outgoing call acceptance
+outcallacceptlistkey=
+
+# Keys to be pressed for enable Distinctive Ringing
+distinctiveringenabkey=
+
+# Keys to be pressed for disable Distinctive Ringing
+distinctiveringdisabkey=
+
+# Keys to be pressed for enable Distinctive Ringback
+distinctiveringbackenabkey=
+
+# Keys to be pressed for disable Distinctive Ringback
+distinctiveringbackdisabkey=
+
+# Keys to be pressed for Speed dialing
+speeddialingsetkey=
+
+# Keys to be pressed for disable the Speed dialing feature
+speeddailingdialkey=
+
+# Keys to be pressed for enabling the hotline feature
+hotlineenbkey=
+
+# Keys to be pressed for disabling the hotline feature
+hotlinedisabkey=
+
+# Keys to be pressed for Enabling the Warmline Feature
+warmlineenbkey=
+
+# Keys to be pressed for Disabling the warmline
+warmlinedisabkey=
+
+[[HANDOFF]]
+
+# Specifies the Handoff type
+# 0-Auto Handoff
+# 1-Manual Handoff
+hoff-mode=0
+
+# Handoff to Handoff Interval
+hoff-intvl=20
+
+# Interval for parameters collection and Handoff algorithm evaluation
+hoff-poll-intvl=2000
+
+# Consequtive handoff polling threshold
+conseq-hoff-thrsld=2
+
+# Flag to play warning tone before handoff
+hoff-playtones=0
+
+# Handoff Message Content type
+hoff-msg-content-type=text/plain
+
+# Maximum number of handoffs allowed per call
+max-hoff-per-call=1000
+
+# Hardhoff waittime 
+hardhoff-waittime=3
+
+# Autohoff Interval
+autohoff-intvl=0
+
+# Viability flag (0-disable, 1-enable)
+viability-flag=0
+
+# Viability server ip
+viability-server=
+
+# Network up timeout
+nwk-up-timeout=30
+
+# Network down timeout
+nwk-down-timeout=40
+
+# MIN Adpt block time in milliseconds
+min-adpt-blocktime=10000
+
+# MAX Adpt block time
+max-adpt-blocktime=300000
+
+# Bad media adpt blocktime
+badmedia-adpt-blocktime=60000
+
+# Voice operation mode
+# 0 - VOIP only
+# 1 - 1xRTT
+# 2 - VOIP_EVDO
+# 3 - VOIP_1xRTT
+# 4 - SYS IP
+# 5 - User configurable
+voice-opmode=5
+
+[[NETWORK-CONNECTION-MANAGEMENT]]
+# All the params under this header are NCM params
+# check whether they are used or can be moved to NCM
+
+# Minimum WiFi SS percent for roaming to a WiFi AP. Possible values are from 0 to 100
+WiFi-Roam-MinSS=60
+
+# Cutoff WiFi SS percent for roaming away from a WiFi AP. Possible values are from 0 to 100
+WiFi-Roam-CoffSS=40
+
+# EVDO entry name for connecting to the EVDO Network
+EVDO-Entry-Name=
+
+# VPN entry name for connecting to remote Network
+VPN-Entry-Name=
+
+# Entry fail retry timeout
+EntryFail-Time=300000
+
+# Entry retry fail count
+Max-EntFailCnt=5
+
+# Priority scan interval for higher priority network
+MinPriority-Scanintvl=30000
+MaxPriority-Scanintvl=900000
+PriorityScan-Multfactor=2
+
+[[VCC]]
+# Handoff URI for roaming to WiFI
+VDI=
+
+# Handoff Number for roaming to Cellular.
+# Used if HS_VCC_GET_VDN_USING_MESSAGE No defined
+VDN=
+
+# Max-wait in Milli-Sec. for disconnecting old call-leg after handoff. 
+# Within this time if server doesn't disconnect, client will disconnect
+VCC-Call-Disc-Wait=2000
+
+# SMS transport option (UNSUPPORTED option)
+#  0=Always use cellular sms
+#  1=Use same network as for calls
+#  2=Use same network as for calls. Use celldata, if available
+SMS-Transport-Opt=1
+
+# Minimum time to intiate turnoff event for CS radio once its turned on
+min-cs-ontime=60000
+
+[EMERGENCY]
+# Emergency call network option for making emergency call
+# 0=Always use cellular network
+# 1=Use wifi if cellular nwk not available (Unsupported)
+# 2=Use selected nwk (Unsupported)
+Emergency-Call-Nwk-Opt=0
+
+# Emergency call handoff option
+# 0=Do not handoff emergency calls
+# 1=Handoff from wifi to cellular (Unsupported)
+# 2=Normal handoff (Unsupported)
+Emergency-Call-Handoff-Opt=0
+
+# List of Noanchoring digit maps. Digit maps are separated by spaces.
+# Allowed characters in digitmap are  0-9 and x, [, ], ., - and 't'.
+# If callee matches this, no anchoring is performed for outgoing call.
+Noanchoring-digitmap-list=x.T
+
+[STEPDIAL]
+# Step Dial Number
+Step-Dial-Number=
+
+# Step Dial Type
+# 0=No step dialing
+# 1=Step dial after ALERT
+# 2=Step dial after CONNECT, with configured delay
+# 3=Step dial using SIP MESSAGE on Cellular Data
+# 4=Automatically try (3) and then (2)
+# 5=Automatically try (2) and then (3)
+Step-Dial-Type=0
+
+# Step Dial Delay value
+Step-Dial-Delay=0
+
+# Inter Digit dial time
+Inter-Digit-Dial-time=90
+
+# Step Dial Prefix
+Step-Dial-Prefix=
+
+# Step Dial Suffix
+Step-Dial-Suffix=
+
+# Replace '+' in Callee with this, while sending Callee as DTMF in step-dialing
+Step-Dial-Plus-Replace=
+
+[DIAL-NETWORK-PREF]
+# List of WiFi-Only digit maps. Digit maps are separated by spaces.
+# Allowed characters in digitmap are  0-9 and x, [, ], ., - and 't'.
+# If callee matches this, outgoing call is made only on WiFi.
+WiFi-Only-digitmap-list=x.T
+
+# List of WiFi-Pref digit maps. Digit maps are separated by spaces.
+# Allowed characters in digitmap are  0-9 and x, [, ], ., - and 't'.
+# If callee matches this, preferred n/w for o/g call is WiFi.
+WiFi-Pref-digitmap-list=x.T
+
+# List of Cell-Only digit maps. Digit maps are separated by spaces.
+# Allowed characters in digitmap are  0-9 and x, [, ], ., - and 't'.
+# If callee matches this, outgoing call is made only on Cellular.
+Cell-Only-digitmap-list=x.T
+
+# List of Cell-Pref digit maps. Digit maps are separated by spaces.
+# Allowed characters in digitmap are  0-9 and x, [, ], ., - and 't'.
+# If callee matches this, preferred n/w for o/g call is Cellular.
+Cell-Pref-digitmap-list=x.T
+
+
+[EP0]
+
+# Services indicates which services are enabled for the endpoint.
+# Set the particular bit to enable the particular service
+# Example:
+# 0   - 0x0 No services are enabled
+# 1   - 0x1 Voice is enabled
+# 2   - 0x2 SMS is enabled
+# 4   - 0x4 MMS is enabled
+services=1
+
+# Profile Id to be loaded on this endpoint
+profile-id=
+
+# Alias of phone number
+alias=
+
+# Phone context
+phone-context=
+
+# This is used to  handle if  dialed string is a telephone number
+# 1-TEL_URI
+# 2-SIP_URI
+# 3-INVOKE_ENUM 
+telno-handling=1
+
+# Card type. valid card types are
+# 0 - HS_VOIP_NOCARD,
+# 1 - HS_VOIP_SOUNDCARD,
+# 2 - HS_VOIP_SI3210_CARD,
+# 3 - HS_VOIP_QUICKNETCARD
+cardtype=0
+
+# EP type. valid eptypes are
+# 0 - HS_VOIP_ENDPOINT_NOTPRESENT
+# 1 - HS_VOIP_ENDPOINT_SOUNDCARD
+# 2 - HS_VOIP_ENDPOINT_SLICCARD
+# 3 - HS_VOIP_ENDPOINT_QUICKNETCARD
+# 4 - HS_VOIP_ENDPOINT_FXO
+# 5 - HS_VOIP_ENDPOINT_FAX
+# 6 - HS_VOIP_ENDPOINT_B2BUA
+# 7 - HS_VOIP_ENDPOINT_LOOPBACK
+endpointtype=7
+
+#EC Option(0-Disable, 1-LEC, 2-AEC, 3-AES)
+ecoption=2
+
+# EC Tail length
+# Any value which is multiple of 8 within 512
+ectaillength=64
+
+# 0 -  Headset
+# 1 -  Speaker
+# 2 -  Handset
+aecmode=0
+
+# Enable EVQM
+# 0 - OFF - disable
+# 1 - ON - enable
+enable-evqm=1 
+
+# Freeze option for AEC and LEC
+freeze-option=0
+
+# Noise level option for AEC and LEC
+nlp-option=1
+
+# Comfort Noise inject option for AEC and LEC
+cni-option=1
+
+# AGC tx level, valid are 0-30 and 255 for OFF
+agctxlevel=255
+
+# AGC rx level, valid are 0-30 and 255 for OFF
+agcrxlevel=255
+
+#LGC tx level(Any values from 0 to 60 and 30 is disabled)
+lgctxlevel=30
+
+#LGC rx level(Any values from 0 to 60 and 30 is disabled)
+lgcrxlevel=30
+
+#NC tx level(Any values from 0 to 255)
+nctxlevel=55
+
+#NC rx level(Any values from 0 to 255)
+ncrxlevel=255
+
+#TX Howling Suppressor(0- Disabled / 1- Enabled)
+howltxsupp=0
+
+#RX Howling Suppressor(0- Disabled / 1- Enabled)
+howlrxsupp=0
+
+# TXRX fixed delay, 32 for Soundcard, 90 for Quicknet card
+txrxdelay=0
+
+# RTP redundancy type as per RC 2198
+# 0 - Fixed
+# 1 - Adaptive
+# 2 - Best MOS 
+# 3 - Optimum MOS
+# 4 - Optimum bandwidth
+redundancy-type=1
+
+# JB Adaptation Speed factor. Valid values are
+# 0 - Fixed JB
+# 1 - Very Low Speed Adaptive JB
+# 2 - Low Speed Adaptive JB
+# 3 - Medium Speed Adaptive JB
+# 4 - High Speed Adaptive JB
+# 5 - Very High Speed Adaptive JB
+jbadapt-speed=5
+
+# JB Buffer size in msec, should be minimum 10 msec
+jbbufsz=600
+
+#JB Option(0- Disabled / 1- Enabled)
+jbtxopt=0
+
+#Far end echo suppressor option(0- Disabled / 1- Enabled)
+farendechosuppressor=0
+
+#G722 time stamp option(0-WB/ 1-NB)
+G722-time-stamp=0
+
+#G726 bit pack option(0-I366.2 /1- RFC3551)
+G726-bit-pack=1
+
+# Device name for sound card
+#For OSS device is /dev/dsp0
+#For ALSA, device is default
+devicename=default
+
+# VAD type
+# 0 - VAD OFF
+# 1 - G711 ANNEX II silence supression
+# 2 - Codec built-in silence supression
+# 3 - Codec built-in SS and  G711 ANNEX II for codecs not supporting built-in SS
+vadtype=3
+
+# Handle CN packets even if CN is not negotiated in SDP
+# (0 - disable 1 - enable)
+nonnegotiated-cn=0
+                     
+# Data type (0=Linear16,1=G711mulaw)
+datatype=0
+
+# VMWI type
+# 0 - DISABLED
+# 1 - DTMF
+# 2 - FSK BELLCORE
+# 3 - FSK ETSI
+# 4 - JAPAN CLIP (ENGLISH)
+# 5 - JAPAN CLIP (JAPANESE)
+# 6 - BT
+vmwi-type=0
+
+# VMWI power level
+# 0 - DISABLED
+# 1 - DTMF
+# 2 - FSK BELLCORE
+# 3 - FSK ETSI
+# 4 - JAPAN CLIP (ENGLISH)
+# 5 - JAPAN CLIP (JAPANESE)
+# 6 - BT
+vmwi-power-level=13
+
+# VMWI alerting signal
+# 0 - NOALLERT
+# 1 - DTAS
+# 2 - RPAS
+# 3 - LR
+# 4 - LR-DTAS
+vmwi-alertingsignal=3
+
+# VMWI message refresh time (0 to 60 minuites)
+vmwi-msg-refreshtime=30
+
+# VMI message display waiting time (120 to 240 minuites)
+vmwi-msg-display-waitingtime=150
+
+# VMWI interval timer (1 to 30 seconds)
+# 0 - disabled
+vmwi-interval-timer=1
+
+# Recording sampling rate 8000 to 48100
+rec-sam-rate=48000
+
+# Play sampling rate 8000 to 48100
+play-sam-rate=48000
+
+# Recordnig buffer size 160,320,480,128,256,512,
+# 1024,1764,1920,2048,4096
+rec-buf-size=1920
+
+# Playing buffer buffer size 160,320,480,128,256,512,
+# 1024,1764,1920,2048,4096
+play-buf-size=1920
+
+# Flag to indicate security on requests
+# 0 - HS_VOIP_ALLWAYS_DISABLE_SECURITY
+# 1 - HS_VOIP_ALLWAYS_ENABLE_SECURITY
+# 2 - HS_VOIP_TEMP_DISABLE_SECURITY
+# 3 - HS_VOIP_TEMP_ENABLE_SECURITY
+srtpflag=0
+
+# SRTP option is applicable if srtpflag is enabled.
+# 1 - SRTP Encryption only
+# 2 - SRTP Authentication only
+# 3 - SRTP Encryption and authentication
+srtpoption=3
+
+# Flag to indicate video on requests
+# 0 - HS_VOIP_ALLWAYS_DISABLE_VIDEO
+# 1 - HS_VOIP_ALLWAYS_ENABLE_VIDEO
+# 2 - HS_VOIP_TEMP_DISABLE_VIDEO
+# 3 - HS_VOIP_TEMP_ENABLE_VIDEO
+videoflag=3
+
+# Option to specify the report blocks to be sent in RTCP XR
+# Bit 1 Set  - Loss RLE Report
+# Bit 2 Set  - Duplicate RLE Report 
+# Bit 3 Set  - Pakcet Receipt times Report 
+# Bit 4 Set  - Receiver Reference times Report 
+# Bit 5 Set  - DLRR Report 
+# Bit 6 Set  - Statistics Summary Report 
+# Bit 7 Set  - VoIP Metrics RLE Report 
+# Multiple options can be selected by assigning a required value  
+# Min - 0 - No XR report will be issued. 
+# Max- 127 and above - XR Report will have all the blocks.
+rtcp_xr_opt=0
+
+# Precondition type
+# 0 - disable
+# 1 - QOS
+# 2 - CONN
+# 3 - SEC
+precon-type=0
+
+# precondition status type
+# 0 - E2E
+# 1 - SEGMENTED
+# 2 - BOTH
+precon-statustype=1
+
+# Desired QOS strength options
+# 1 - NONE
+# 2 - OPTIONAL
+# 3 - MANDATORY
+# Desired precondition strength for E2E
+precondes-e2esend=3
+precondes-e2erecv=3
+
+# Desired precondition strength for local
+precondes-localsend=3
+precondes-localrecv=3
+
+# Desired precondition strength for remote
+precondes-rmtsend=2
+precondes-rmtrecv=2
+
+# QOS option
+# 1 - qos initiated by system
+# 2 - qos initiated by HS client
+qos-opt=1
+
+# GBR timeout action
+# 0 - assume GBR allocation done, continue call.
+# 1 - assume GBR allocation failed, release call
+gbrtimeout-action=0
+
+# Time to wait for GBR allocation after call is initiated (in millisecs).
+gbr-timeout=1000
+
+# Time to wait for call release after GBR deactive is received
+gbrdeactiv_timeout=0
+
+# Allow video share record (0-disable, 1-enable) (currently not supported)
+vs-allow-record=0
+
+# Max duration for video sharing (in sec)
+vs-max-duration=1800
+
+# Server uri to set supplementary services using XCAP.
+suppserv-addr=
+
+# Enable to send suppservs XCAP requests on secure connection (using TLS)
+# 0 - disable
+# 1 - enable
+suppserv-secureopt=1
+
+[[SIP]]
+# Flag to enable/ disable auto registration of SIP (0=disable, 1=enable).
+# Flag is used only for CPE application
+sipautoregistration=0
+
+# Flag to enable/disable proxy-outbound 0=disable, 1=enable 
+proxy-outboundflag=1
+
+# Flag for out-bound proxy(out-session and in-session) requests (0=disable, 1=enable) 
+alwaysuse-outboundproxy=1
+
+# SIP registrar (0.0.0.0 if no registrar) with port number, domain name is accepted
+sipregistrarip=0.0.0.0:5060
+
+# Flag to enable SIP Outbound feature (RFC 5626) - 0=disable, 1=enable
+enable-sipoutbound=0
+
+# List of SIP proxies (0.0.0.0 if no proxy) with port number separated by space
+# domain name is accepted
+# SIP proxy should be valid for outbound proxy
+# If enable-sipoutbound is enabled, there MUST be atleast two proxy ips configured
+# If sipoutbound is disabled and second value is provided then it will be used as
+# secondary proxy address
+sipproxyip=3.6.143.123:80
+
+# Base time(in seconds) to wait for registration retry when all flows are failed
+ob_reg_basetime_all_flows_failed=30
+
+# Base time(in seconds) to wait for registration retry when only few flows are failed
+ob_reg_basetime_few_flows_failed=90
+
+# Max wait time(in seconds) for retry registration
+ob_reg_max_wait_time=1800
+
+# Outbound proxy for secure signaling, if mandatory security
+# flag is enabled secure outbound proxy should be set
+# If enable-sipoutbound is enabled, there MUST be atleast two proxy ips configured
+secureoutboundproxy=factorydomain
+
+# Realm name 
+realm0=
+
+# User name and password for realm0
+realm0credentials=
+
+# Realm name
+realm1=
+
+# User name and password for realm1
+realm1credentials=
+
+# Type of action to be taken when realm credentials mismactch
+# 0-DEFAULT
+# 1-ANONYMOUS
+# 2-REJECT
+realm-challengeopt=0
+
+# Total number of registration retry attempts in case of failure.
+# 0 is taken as Infinite-retries.
+# Ignored if registration module is not managing the registration retries
+regfail-maxnumretrnsms=0
+
+# Interval in seconds after which the registration attempt will
+# be made incase of no response from registrar(timeout)
+regtimeout-retryinterval=30
+
+# Interval in seconds after which the registration attempt will
+# be made incase of any failure responses from registrar
+regfail-retryinterval=300
+
+# SIP subscription id flag (Disable- 0    Enable- 1)
+sip-subscription-id=0
+
+# Sig comp identifier is the unique value generated per end point by the oam
+# Important.One Should not edit this manually
+sig-comp-identifier=
+
+# Flag to allow SIP coompression
+# 0 = disabled,1 = enabled
+sip-compr-flag=0
+
+# SIP outbound proxy sig comp id is a string must be configured when
+# the sip compression is enabled
+outbound-proxy-sigcomp-id=
+
+# Flag to indicate the SIP compression algorithm
+# 0 - HS_VOIP_OAM_SIG_ALGO_DEFLATE
+# 1 - HS_VOID_OAM_SIG_ALGO_ZLIB
+sip-compr-algorithm=0
+
+[[SMS]]
+# sms-encoding-type indicates the encoding to be used while sending the SMS.
+# 0 - diabled 	no encoding used, sent as simple MESSAGE
+# 1 - is637	uses the IS637 binary encoding for content in MESSAGE
+# 2 - gsm	uses the MIME type application/vnd.3gpp.sms (3GPP TS 24.341)
+# 3 - oma       SIMPLE Pager Mode Messaging
+sms-encoding-type=3
+
+# use_sipurl_is637 is flag with 0- Disabled 1-enabled
+use-sipurl-is637=0
+
+# sms-gateway-number is a number that you use to either send SMS from your
+# mobile phone or that your friends can use to send SMS to you from their
+# mobile phones
+sms-gateway-number=+9988776655
+
+#This parameter indicates how many times SMS SUBMIT should be retransmitted
+#if no response is received. If 0 is set, there will not be any retransmits.
+sms-fail-maxnumretrnsms=1
+
+# Bitmap usage: for report-options, user receives the status report when the actual
+#recipient receives the SMS
+# 0 - dsabled
+# Bit 1 Set  - positive-delivery
+# Bit 2 Set  - negative-delivery
+# Bit 3 Set  - displayed
+# Bit 4 Set  - request-reply-path 
+report-options=1
+
+#If this flag is set, we request the actual recipient of the message to use
+#our gateway to reply back.
+#0 - dsabled, 1- enabled
+request-reply-path=0
+
+#This parameter indicates the sms gateway uri
+sms-gateway-uri=
+
+[[SMIME]]
+# When this flag is enabled all outgoing messages with content
+# will be signed. When set to  2 or 3, application can overwrite the flag.
+# 0 - HS_VOIP_ALLWAYS_DISABLE_SECURITY
+# 1 - HS_VOIP_ALLWAYS_ENABLE_SECURITY
+# 2 - HS_VOIP_TEMP_DISABLE_SECURITY
+# 3 - HS_VOIP_TEMP_ENABLE_SECURITY
+smime-sign-flag=0
+
+# When this flag is enabled all messages will conatins SIP headers (valid are 0/1)
+smime-siphdrsflag=0
+
+# When this flag is enabled all outgoing messages with content
+# will be encrypted,if sign flag is also enabled then it will
+# be "sign-encrypt-sign". When set to  2 or 3, application can overwrite the flag.
+# 0 - HS_VOIP_ALLWAYS_DISABLE_SECURITY
+# 1 - HS_VOIP_ALLWAYS_ENABLE_SECURITY
+# 2 - HS_VOIP_TEMP_DISABLE_SECURITY
+# 3 - HS_VOIP_TEMP_ENABLE_SECURITY
+smime-encrypt-flag=0
+
+# SMIME certificate file name
+smime-certifcte-filename=
+
+# SMIME private key file name
+smime-privatekey-filename=
+
+[[CALLFEATURES]]
+# User response timeout in seconds
+userresptimeout=20
+
+# Flag to enable or disable replacing call
+replacecallflag=1
+
+# Call forward no answer timeout in seconds
+cfwdnoanswtimeout=10
+
+# Shared call appearance flag
+# 1 - enable feature
+# 0 - disable
+sca-flag=0
+
+#This parameter is used for setting the SDP session mode while holding the call
+#0 - sendonly
+#1 - inactive
+holdmode=0
+
+#This parameter is used for setting the SDP connection ip while holding the call
+#0 - <0.0.0.0>
+#1 - <previous ip>
+holdip=1s
+
+# This parameter is used for setting codecs list in unhold request
+# 0 - previous negotiated list
+# 1 - all local configured codec list (local capabilities)
+callresume-mediacaps=0
+
+# Use-p-assert identity
+use-p-assert-id=1
+
+# Flag to  fill codecs in answer SDP
+# 0 - single codec in asnwer SDP
+# 1 - all codecs in answer SDP
+ansr-codecs=1
+
+# Timeout to delay ring to user until 180 ringing is completely transmitted.
+# Timeout in milliseconds
+# 0 - delay is not applied
+ringing-delay=0
+
+# Flag to turnoff periodic refreshes like SIP register, subscribe, Publish and update 
+# if active call is present.
+voice-call-uninterruption=0
+
+# Flag to issue alert from APP 
+alertcall-fromapp=0
+
+# 0-RESTRICTED
+# 1-ALLOWED
+# 2-USER INTERVENTION REQUIRED
+hold-option=1
+
+[[IPPBX]]
+# CFA,CFB,CFNA,CW,CT,DND,SCR,SCA,
+# OCR,OCA,AA,CALLID,REDIAL,CALLRETURN,CALLTRACE,VM,ACB,DR,SPD,HL,WL
+RemoteFeatures=
+
+# Enable remote features flag
+# 0 - apply to local feature settings
+# 1 - apply to remote feature settings
+EnableRemoteFeatures=0
+
+# Valid URI
+hotline=
+
+# Valid URI
+warmline=
+
+# Comma (,) seperated list of URIs and #s
+speeddialnumbers=
+
+# 0-RESTRICTED
+# 1-ALLOWED
+# 2-USER INTERVENTION REQUIRED
+transferoption=1
+
+[[FXO]]
+# 0=Battery Reversal,1=Tone detection
+answeringsupervision=1
+
+# 0=Battery Reversal,1=Tone detection
+disconnectingsupervision=0
+
+[[FAX]]
+# 1-T38_FAX_RELAY,
+# 2-VOICE_AND_T38_FAX_RELAY,
+# 3-VOICE_AND_FAX_PASS_THROUGH
+t38faxoption=0
+
+# Value must be 2400/4800/9600/14400
+t38faxmaxbitrate=14400
+t38faxfillbitremoval=0
+t38faxtranscodingmmr=0
+t38faxtranscodingjbig=0
+
+# 1-localTCF, 2-transferredTCF
+t38faxratemgmt=2
+t38faxmaxbuffer=280
+t38faxmaxdatagram=280
+
+# 0-none, 1- UDPRedundancy, 2-UDPFEC
+t38faxmaxudpec=1
+t38faxredundancydepth=3
+t38faxtransportprotocol=RTP
+t38faxencodingmethods=G711
+
+[OTHERS]
+i_opmode-cs-radio-control=0
+i_opmode-celldata-conn-control=0
+i_opmode-wifi-radio-control=0
+sl_opmode0-NwAdpts=WiFi,WiMax,Celldata
+i_opmode0-call-on-celldata=1
+sl_opmode1-NwAdpts=WiFi,WiMax
+i_opmode1-voipallow=1
+sl_opmode2-NwAdpts=WiFi,WiMax,Celldata
+i_opmode2-call-on-celldata=1
+i_opmode2-csallow=0
+sl_opmode3-NwAdpts=WiFi,WiMax
+sl_opmode5-NwAdpts=WiFi,WiMax,Celldata,Ethernet
+i_opmode5-cs-option=2
+i_wifi-reg-timeout=240
+i_wimax-reg-timeout=300
+i_celldata-reg-timeout=300
+i_rtp-pktloss-entrylimit=4
+i_rtp-pktloss-returnlimit=8
+i_rtp-pktloss-scanlimit=12
+i_rtp-pktloss-exitlimit=15
+i_rtp-jitter-entrylimit=100
+i_rtp-jitter-returnlimit=150
+i_rtp-jitter-scanlimit=300
+i_rtp-jitter-exitlimit=400
+i_rtp-rtt-entrylimit=1000
+i_rtp-rtt-returnlimit=1200
+i_rtp-rtt-scanlimit=1600
+i_rtp-rtt-exitlimit=2000
+i_rtp-rfactor-entrylimit=70
+i_rtp-rfactor-returnlimit=60
+i_rtp-rfactor-scanlimit=40
+i_rtp-rfactor-exitlimit=30
+i_hoff-rtp-timeout=60
+i_sip-server-check-option=0
+i_regref-nwup-option=1
+i_lte_reconnectpdn_intvl=300
+i_lte_fbtocs_intvl=10
+i_lte_aka=
+sl_csonly_nos=
+i_ftAuth=0
+i_provideft=0
+i_ft_thumb=0
+i_ft_standfwd_enable=0
+i_ft_aut_accept=
+i_ft_cap_always_on=0
+s_ft_http_cs_user=
+s_ft_http_cs_pwd=
+s_ft_default_mech=MSRP
+i_vs_auth=0
+i_provide_vs=0
+i_allow_vs_save=
+i_is_auth=0
+i_provide_is=0
+i_max_adhoc_chat_size=10
+i_standalone_msg_auth=
+i_im_warn_sf=0
+i_gc_store_fwd=0
+i_gc_invite_only_store_fwd=0
+i_im_warm_iw=0
+i_im_sess_start=0
+i_sessim_autoaccept=0
+i_gc_auto_accpt=0
+i_gc_msg_maxsize=512
+s_msg_store_username=
+s_msg_store_pwd=
+i_msg_store_auth=
+i_presence_auth=0
+i_enable_rcse_switch=-1
+i_voicecall_auth=0
+i_videocall_auth=0
+i_geo_pull_auth=0
+i_geo_push_auth=0
+i_gc_subsc_reqd=1
+s_prov_confservuri=0.0.0.0
+s_prov_rcsversion=
+s_prov_clntvendor=
+s_prov_clntversion=
+s_prov_termvendor=
+s_prov_termswverion=
+s_prov_termmodel=
+s_prov_imei=
+
+####  DNS information should be given in the following format
+#   <domain name> <transportprotocol(UDP/TCP/SCTP/TLS)> <port> <IPaddress> <service type(SIP/SIPS/STUN)>.
+# A new line must be given at the end of each line.
+# For eg:
+#  www.hellosoft.com UDP 5060 192.168.2.168 SIP
+#####
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<imps_config xmlns = "http://www.hellosoft.com/imps">
+<!-- IMPS configuration file -->
+<advance_setting>
+
+   <server_type>3</server_type><!-- valid server types are 1, 2 and 3 -->
+
+   <pidf_pres>1</pidf_pres><!-- value should be 0 or 1 -->
+
+   <pidf_namespace>urn:ietf:params:xml:ns:cpim-pidf</pidf_namespace><!-- value should be 0 or 1 -->
+
+   <enable_rls>1</enable_rls><!-- value should be 0 or 1 -->
+
+   <notify_filter>1</notify_filter><!-- value should be 0 or 1 -->
+
+   <max_resources>500</max_resources><!-- value should be non-negative integer -->
+
+   <max_presence_enabled_resources>40</max_presence_enabled_resources><!-- value should be non-negative integer -->
+
+   <local_copy>1</local_copy><!-- value should be 0 or 1 -->
+
+   <xcap_partial_node_upload>0</xcap_partial_node_upload><!-- value should be non-negative integer -->
+
+   <xcap_cache_size>500</xcap_cache_size><!-- value should be non-negative integer -->
+
+   <xcap_cache_enable>1</xcap_cache_enable><!-- value should be 0 or 1 -->
+
+   <presence_profile>0</presence_profile><!-- value should be 0 or 1 -->
+
+   <favourite_link_label_max_length>200</favourite_link_label_max_length><!-- max value is 200 characters -->
+
+   <icon_max_size>200</icon_max_size><!-- max value should be 200kb -->
+
+   <note_max_size>200</note_max_size><!-- -->
+
+   <location_text_max_length>200</location_text_max_length><!-- max value is 200 characters -->
+
+   <location_validity>300</location_validity><!-- -->
+
+   <max_location_update>300</max_location_update><!-- -->
+
+   <publish_expiry_time>3600</publish_expiry_time><!-- -->
+
+   <vip_contacts_poll_max_frequency>3600</vip_contacts_poll_max_frequency><!-- -->
+
+   <revoke_timer>72</revoke_timer><!-- In number of hours -->
+
+   <client_obj_data_limit>500</client_obj_data_limit><!-- -->
+
+   <winfo_ev_subscribe_throttle>20</winfo_ev_subscribe_throttle><!-- throttle value in seconds -->
+
+   <pres_ev_subscribe_throttle>20</pres_ev_subscribe_throttle><!-- throttle value in seconds -->
+
+</advance_setting>
+
+<server_setting>
+
+<!-- value of the server address should be valid domain name or valid IP address and if port number is entered then it should be valid -->
+
+   <default_server>http://10.1.30.17:5060</default_server>
+
+   <resourcelist>http://10.1.30.17:5060</resourcelist>
+
+   <presrules>http://10.1.30.17:5060</presrules>
+
+   <profiles>http://10.1.30.17:5060</profiles>
+
+   <groups>https://10.1.30.17:5060</groups>
+
+   <directory>http://10.1.30.17:5060</directory>
+
+   <rls_server>sip://10.1.30.17:5060</rls_server>
+
+   <xdm_subscription>http://10.1.30.17:5060</xdm_subscription>
+
+   <rls-services>http://10.1.30.17:5060</rls-services>
+
+   <filetransfer>http://10.1.30.17/IMS/filetransfer:80</filetransfer>
+
+   <ldap_search_server>http://www.pst.hellosoft.com:80</ldap_search_server> <!-- TODO -->
+
+   <xcap_search_server>http://www.pst.hellosoft.com:80</xcap_search_server> <!-- TODO -->
+
+   <images_server>http://10.1.30.17/IMS/xcap-images/users:80</images_server> 
+</server_setting>
+
+
+
+<xcap>
+
+<root_host/><!-- Optional xcap root host name, if NULL uses default_server-->
+
+<root_uri>/xcap-root</root_uri>
+
+<auth_type>Digest</auth_type><!-- Early IMS or Digest-->
+
+<resource_uri>/xcap-root/resource-lists/users/%s/index</resource_uri>
+
+<presrule_uri>/xcap-root/org.openmobilealliance.pres-rules/users/%s/pres-rules</presrule_uri>
+
+<statusicon_uri>/xcap-root/org.openmobilealliance.pres-content/users/%s/oma_status-icon/icon_document</statusicon_uri>
+
+<perm_presence_uri>/xcap-root/pidf-manipulation/users/%s/perm-presence</perm_presence_uri>
+
+<profile_uri>/xcap-root/org.openmobilealliance.user-profile/users/%s/profile.xml</profile_uri>
+
+<directory_uri>/xcap-root/org.openmobilealliance.xcap-directory/users/%s/directory.xml</directory_uri>
+
+<groups_uri>/xcap-root/group/users/%s/group.xml</groups_uri>
+
+   <resource_auid>resource-lists</resource_auid>
+
+   <presrule_auid>pres-rules</presrule_auid>
+
+   <profile_auid>profile</profile_auid>
+
+   <directory_auid>directory</directory_auid>
+
+   <groups_auid>group</groups_auid>
+
+   <xcap_search_uri>..</xcap_search_uri> <!-- TODO -->
+
+   <xcap_search_result>..</xcap_search_result> <!-- TODO -->
+
+</xcap>
+
+</imps_config>
+/hs_imps_cfg.xml/1.1.2.1/Wed Sep 16 06:48:59 2020//THS_IMS_WEBRTC_BRANCH
+/hs_voip_cfg.txt/1.1.2.1/Wed Sep 16 06:48:59 2020//THS_IMS_WEBRTC_BRANCH
+/hs_voip_dns_info_cfg.txt/1.1.2.1/Wed Sep 16 06:48:59 2020//THS_IMS_WEBRTC_BRANCH
+/hs_voip_india_tones_cfg.txt/1.1.2.1/Wed Sep 16 06:48:59 2020//THS_IMS_WEBRTC_BRANCH
+D
+Projects/IMS/source/sdk/cpaas/web/config/factorydomain/config
+:pserver:anjanik@10.1.30.15:/var/cvs
+THS_IMS_WEBRTC_BRANCH
+/hs_msm_cfg.xml/1.1.2.1/Wed Sep 16 06:48:59 2020//THS_IMS_WEBRTC_BRANCH
+/hs_ncm_cfg.xml/1.1.2.1/Wed Sep 16 06:48:59 2020//THS_IMS_WEBRTC_BRANCH
+D/Profiles////
+D/config////
+Projects/IMS/source/sdk/cpaas/web/config/factorydomain
+:pserver:anjanik@10.1.30.15:/var/cvs
+THS_IMS_WEBRTC_BRANCH
+D/factoryuser////
+Projects/IMS/source/sdk/cpaas/web/config/factorydomain/Profiles
+:pserver:anjanik@10.1.30.15:/var/cvs
+THS_IMS_WEBRTC_BRANCH
+proxy-user-name=factoryuser
+
+proxy-password=factoryuser
+
+user-map=sip:factoryuser@domain
+
+displayname=factoryuser
+
+emailid=
+
+callforwardoption=0
+
+callforwardalways=
+
+callforwardonbusy=
+
+callforwardonnoanswer=
+
+donotdisturbflag=0
+
+autoanswerflag=0
+
+autoanswertimeout=60
+
+callparkuri=
+
+rtptimeout=30
+
+callwaitingflag=1
+
+sipprivacylevels=
+
+sipassertedidentity=
+
+# voice mail uri
+voice-mail-uri=
+
+# 0 - Disabled   1- Enabled
+mwi-enabled=0
+
+mwiaccounturi=
+
+mwirefreshtimeout=60
+
+mwiusername=
+
+mwipassword=
+
+#Default conference type
+# 0 - disable
+# 1 - 3way conference
+# 2 - Network based conference(Bridge conference)
+conference-type=1
+
+conferenceuri=sip:conference@metropcs.com
+
+# Flag to enable/disable subscription for Bridge Conference
+# TODO move conference params to domain config
+# Disable this flag for MEtroPCS
+enable-conf-subscription=1
+
+vmailflag=
+
+fromchange-support=0
+
+# service capabilities
+# 0 - 0x0 invalid service
+# 1 - 0x1 sms service
+# 2 - 0x2 mms service
+# 4 - 0x4 im service
+# 8 - 0x8 ft service
+# 16 - 0x10 image share service
+# 32 - 0x20 incall videoshare service
+# 64 - 0x40 videoshare service
+# 128 - 0x80 presence service
+# 256 - 0x100 call service
+# 512 - 0x200 video call service
+# 1024 - 0x400 geo pull service
+# 2048 - 0x800 geo push service
+serv-capabilities=415
+
+#Favourite link contol
+# 0 - Automatic mode
+# 1 - Full manual mode
+# 2 - Combination of both modes
+favourite-link-control=
+
+favourite-link-urls=
+
+XCAP-authentication-user-name=factoryuser
+
+XCAP-authentication-secret=factoryuser
+
+calldeflect-uri=
+
+[[DISTINCTIVERINGING]]
+[RINGING]
+5555|101.wav
+5556|102.wav
+3|3.wav
+2x|111.wav
+[RINGBACK]
+2x|111.wav
+5556|112.wav
+5555|111.wav
+3|3.wav
+
+
+[[INCOMING]]
+
+
+[[OUTGOING]]
+
+/hs_voip_profile_cfg.txt/1.1.2.1/Wed Sep 16 06:48:59 2020//THS_IMS_WEBRTC_BRANCH
+/hs_voip_rej_list_cfg.txt/1.1.2.1/Wed Sep 16 06:48:59 2020//THS_IMS_WEBRTC_BRANCH
+D
+Projects/IMS/source/sdk/cpaas/web/config/factorydomain/Profiles/factoryuser
+:pserver:anjanik@10.1.30.15:/var/cvs
+THS_IMS_WEBRTC_BRANCH
